@@ -26,6 +26,7 @@ public class OrderApplication {
 	@Autowired
 	PaymentValidationService paymentValidationService;
 	
+	
 	@Transactional
 	public Long placeOrder(Long itemId, Long customerId, String creditCardNumber) {
 		
@@ -40,10 +41,8 @@ public class OrderApplication {
 		return newOrder.getTid();
 	}
 	
-	public String getOrderStatus(Long orderId) {
-		
+	public String getOrderStatus(Long orderId) {	
 		Order order = orderRepository.findOne(orderId);
-		return order.getStatus();
-		
+		return order.getStatus();	
 	}
 }
