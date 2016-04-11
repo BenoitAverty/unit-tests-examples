@@ -1,15 +1,15 @@
 package com.example.unit.testing.application;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
-
-import static org.assertj.core.api.Assertions.*;
 
 import com.example.unit.testing.domain.Customer;
 import com.example.unit.testing.domain.Order;
@@ -51,9 +51,7 @@ public class OrderApplicationTest {
 		
 		Long result = orderApplication.placeOrder(0L, 0L, "123");
 		
-		ArgumentCaptor<Customer> customerArg = ArgumentCaptor.forClass(Customer.class);
-		ArgumentCaptor<Order> orderArg = ArgumentCaptor.forClass(Order.class);
-		verify(customerRepository).save(customerArg.capture());
+		verify(customerRepository).save(customerMock);
 		verify(orderRepository).save(o);
 		
 		assertThat(result).isEqualTo(0l);
@@ -61,16 +59,14 @@ public class OrderApplicationTest {
 	
 	@Test
 	public void getOrderStatusTest() {
-		// given
+		
 		Order o = mock(Order.class);
 		when(o.getStatus()).thenReturn("IN PROGRESS");
 		
 		when(orderRepository.findOne(0L)).thenReturn(o);
 		
-		// when
 		String result = orderApplication.getOrderStatus(0L);
 		
-		// then
 		assertThat(result).isEqualTo("IN PROGRESS");
 	}
 }
