@@ -10,3 +10,7 @@ buildNumber.properties
 .classpath
 .project
 .settings
+.cache-main
+.cache-tests
+*.iml
+.idea
