@@ -1,7 +1,8 @@
+package com.example.unit.testing.application
+
 import java.time.LocalDate
 import java.util.stream.Collectors
 
-import com.example.unit.testing.application.OrderApplication
 import com.example.unit.testing.domain.repositories.{CustomerRepository, OrderRepository}
 import com.example.unit.testing.domain.{CreditCardService, Customer, Order}
 import com.mmnaseri.utils.spring.data.dsl.factory.RepositoryFactoryBuilder._
@@ -14,12 +15,16 @@ import org.springframework.context.annotation.{Bean, ComponentScan, Configuratio
 import org.springframework.test.context.{ContextConfiguration, TestContextManager}
 
 import scala.util.Random
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
+import org.junit.Test
 
+@RunWith(classOf[JUnitRunner])
 @ContextConfiguration(
   classes = Array(classOf[OrderApplicationSpecContext]),
   loader = classOf[SpringApplicationContextLoader])
 class PlacingOrderSpec extends path.FunSpec with org.scalatest.Matchers {
-
+  
   @Autowired val orderApplication: OrderApplication = null
   @Autowired val customerRepository: CustomerRepository = null
   @Autowired val orderRepository: OrderRepository = null

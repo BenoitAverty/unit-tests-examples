@@ -6,11 +6,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,15 +18,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
-import org.springframework.test.context.junit4.rules.SpringClassRule;
-import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
 import com.example.unit.testing.domain.CreditCardService;
 import com.example.unit.testing.domain.Customer;
 import com.example.unit.testing.domain.Order;
 import com.example.unit.testing.domain.repositories.CustomerRepository;
 import com.example.unit.testing.domain.repositories.OrderRepository;
-import com.nitorcreations.junit.runners.NestedRunner;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
@@ -171,7 +168,10 @@ class OrderApplicationTestContext {
 
 	@Bean
 	public CreditCardService creditCardService() {
-		return Mockito.mock(CreditCardService.class);
+		CreditCardService mock = Mockito.mock(CreditCardService.class); 
+		Mockito.when(mock.expirationDate(Mockito.anyString())).thenReturn(LocalDate.MAX);
+		
+		return mock;
 	}
 
 	@Bean
