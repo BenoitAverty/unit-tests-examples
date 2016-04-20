@@ -32,6 +32,9 @@ class PlacingOrderSpec extends path.FunSpec with org.scalatest.Matchers {
 
   new TestContextManager(this.getClass).prepareTestInstance(this)
 
+  
+  ///////////////////////////////////////////
+  
   describe("Placing an Order") {
 
     describe("With an existing customer") {
